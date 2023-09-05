@@ -64,7 +64,7 @@ export function AllEnq(props) {
       dataField: 'enquiry_processed_flag',
       text: 'Status',
       formatter: (cellContent, row) => (
-        <Button
+        <div
           style={{
             backgroundColor: row.enquiry_processed_flag ? "red" : "green",
             color: "white",
@@ -72,7 +72,7 @@ export function AllEnq(props) {
           }}
         >
           {row.enquiry_processed_flag ? "Close" : "Open"}
-        </Button>
+        </div>
       ),
       sort: true,
       headerStyle: { width: '80px' }, // Set the width for the header
@@ -92,7 +92,7 @@ export function AllEnq(props) {
     {
       dataField: 'actions',
       formatter: (cell, row) => (
-        <a href={"/newreg/?enquiry_id=" + row.enquiry_id}>
+        <a href={"/newreg/" + row.enquiry_id}>
           <Button variant="secondary">Register</Button>
         </a>
       ),

@@ -1,6 +1,7 @@
 
 using DotNetComputerSekho.Model;
 using DotNetComputerSekho.Models;
+using DotNetComputerSekho.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotNetComputerSekho
@@ -31,6 +32,7 @@ namespace DotNetComputerSekho
             builder.Services.AddTransient<ICourseRepository,SQLCourseRepository>();
             builder.Services.AddTransient<IStudentRepository, SQLStudentRepository>();
             builder.Services.AddTransient<IBatchRepository, SQLBatchRepository>();
+            builder.Services.AddTransient<IPaymentRepository, SQLPaymentRepository>();
             builder.Services.AddDbContext<AppDBcontext>(option=>option.UseSqlServer(builder.Configuration.GetConnectionString("default")));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

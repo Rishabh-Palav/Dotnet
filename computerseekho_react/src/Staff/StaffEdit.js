@@ -34,6 +34,8 @@ function StaffEdit() {
                 console.error("Error updating staff");
             }
         });
+        console.log("Staff updated successfully");
+        navigate("/showstaff");
     };
 
     return (

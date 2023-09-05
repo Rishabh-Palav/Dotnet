@@ -22,6 +22,7 @@ namespace DotNetComputerSekho.Models
         public DbSet<Placement> Placement { get; set; }
         public DbSet<Student> Student { get; set; }
         public DbSet<Batch> Batch { get; set; }
-        public DbSet<Course> Course { get; set; }   
+        public DbSet<Course> Course { get; set; } 
+        public DbSet<Payment> Payment { get; set; }
     }
 }

@@ -82,6 +82,7 @@ function ContactUs() {
     } catch (error) {
       console.error('Error storing enquiry:', error);
     }
+    navigate("/");
   };
 
   return (

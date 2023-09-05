@@ -18,8 +18,7 @@
 
         public int? batch_id { get; set; }
         public int? course_id { get; set; }
-
-
+        public int? enquiry_id { get; set; }
         public Student() { }
     }
 

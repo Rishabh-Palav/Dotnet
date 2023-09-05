@@ -88,6 +88,14 @@ namespace DotNetComputerSekho.Models
             return null;
         }
 
+        public List<Student> GetStudentsByEnquiryId(int enquiry_id)
+        {
+            return dbContext.Student
+                .Where(student => student.enquiry_id == enquiry_id)
+                .ToList();
+        }
+
+
         private bool StudentExists(int id)
         {
             return (dbContext.Student?.Any(e => e.student_id == id)).GetValueOrDefault();

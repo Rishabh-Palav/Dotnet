@@ -99,5 +99,18 @@ namespace DotNetComputerSekho.Controllers
             return NoContent();
         }
 
+        // GET: api/getbyenquiry_id/{enquiry_id}
+        [HttpGet("api/getbyenquiry_id/{enquiry_id}")]
+        public ActionResult<List<Student>> GetStudentsByEnquiryId(int enquiry_id)
+        {
+            var students = _repository.GetStudentsByEnquiryId(enquiry_id);
+            if (students == null || students.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return students;
+        }
+
     }
 }

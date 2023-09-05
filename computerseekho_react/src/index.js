@@ -37,7 +37,10 @@ import Call from './StaffDashboard/Call';
 import UpcomingBatchTable from './Batch/BatchList';
 import Gallery from './Gallery';
 import AdminStudlist from './Admin_panel/AdminStudlist';
-
+import NewPayment from './Payment/NewPayment';
+import PaymentForm from './Student/Paymennt';
+import PayEdit from './Payment/PayEdit';
+import Receipt from './Payment/Receipt';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -62,7 +65,7 @@ root.render(
           <Route path="followups" element={<Followups />} />
           <Route path="addenq" element={<AddEnquiry />} />
           <Route path="allenq" element={<AllEnq />} />
-          <Route path="newreg" element={<StudentRegistrationForm />} />
+          <Route path="newreg/:id" element={<StudentRegistrationForm />} />
           <Route path="placerecord" element={<StaffSidePlacement />} />
           <Route path="addplace" element={<AddPlacement />} />
           <Route path="editplace/:id" element={<PlacementEdit />} />
@@ -88,6 +91,11 @@ root.render(
 
 
           <Route path="allstaff" element={<AllStaff />} />
+
+          <Route path="/payment/:enquiry_id/:selectedBatchId" element={<PaymentForm/>} />
+          <Route path="pay/:student_id" element={<PayEdit/>} />
+          <Route path="newpay/:student_id/:batch_fees" element={<NewPayment/>} />
+          <Route path="rec/:student_id" element={<Receipt/>} />
 
 
         </Route>

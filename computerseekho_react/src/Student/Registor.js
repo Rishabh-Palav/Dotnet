@@ -5,11 +5,8 @@ import Button from "react-bootstrap/Button";
 import { useNavigate, useParams } from "react-router-dom";
 
 function StudentRegistrationForm() {
-  // Initialize navigation and get the enquiry_id from URL params
   const navigate = useNavigate();
-  const { enquiry_id } = useParams();
-
-  // State variables to store data
+  const { id } = useParams();
   const [courses, setCourses] = useState([]);
   const [batches, setBatches] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState("");
@@ -21,14 +18,12 @@ function StudentRegistrationForm() {
     student_dob: "",
     student_qualification: "",
     student_mobile: "",
-    student_email: "",
-  });
-  const [enquiryData, setEnquiryData] = useState({
-    enquirer_mobile: "",
-    enquirer_email: "",
+    course_id: "",
+    batch_id: "",
+    student_email:"",
+    enquiry_id:"",
   });
 
-  // Fetch list of courses from the server
   useEffect(() => {
     fetch("http://localhost:8080/api/courses")
       .then((response) => response.json())
@@ -40,7 +35,6 @@ function StudentRegistrationForm() {
       });
   }, []);
 
-  // Fetch batches based on selected course
   useEffect(() => {
     if (selectedCourseId) {
       fetch(`http://localhost:8080/api/Batch/getBatchByCourseId/${selectedCourseId}`)
@@ -54,52 +48,36 @@ function StudentRegistrationForm() {
     }
   }, [selectedCourseId]);
 
-  // Fetch enquiry data and populate form fields
   useEffect(() => {
-    if (enquiry_id) {
-      fetch("http://localhost:8080/api/getById/"+{enquiry_id})
+      fetch(`http://localhost:8080/api/Enquiry/GetByIdEnquiry/${id}`)
         .then((response) => response.json())
         .then((fetchedEnquiryData) => {
-          // Set enquiry data state
-          setEnquiryData({
-            enquirer_mobile: fetchedEnquiryData.enquirer_mobile,
-            enquirer_email: fetchedEnquiryData.enquirer_email,
-          });
-
-          // Populate form fields with enquiry data
           setStudentData((prevStudentData) => ({
             ...prevStudentData,
             student_name: fetchedEnquiryData.enquirer_name,
-            student_address: fetchedEnquiryData.enquirer_address,
-            student_gender: fetchedEnquiryData.enquirer_gender,
-            student_dob: fetchedEnquiryData.enquirer_dob,
-            student_qualification: fetchedEnquiryData.enquirer_qualification,
             student_mobile: fetchedEnquiryData.enquirer_mobile,
-            student_email: fetchedEnquiryData.enquirer_email,
+            student_email: fetchedEnquiryData.enquirer_email_id,
+            enquiry_id : fetchedEnquiryData.enquiry_id,
           }));
-
-          // Set selected course and batch based on enquiry data
           setSelectedCourseId(fetchedEnquiryData.course_id);
           setSelectedBatchId(fetchedEnquiryData.batch_id);
         })
         .catch((error) => {
           console.error("Error fetching enquiry data:", error);
         });
-    }
-  }, [enquiry_id]);
+    
+  }, [id]);
 
-  // Handle course selection change
   const handleCourseChange = (e) => {
     setSelectedCourseId(e.target.value);
     setSelectedBatchId("");
   };
 
-  // Handle batch selection change
+ 
   const handleBatchChange = (e) => {
     setSelectedBatchId(e.target.value);
   };
 
-  // Handle form field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setStudentData((prevData) => ({
@@ -108,41 +86,49 @@ function StudentRegistrationForm() {
     }));
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    if (!selectedCourseId || !selectedBatchId) {
+      console.error("Course and batch must be selected");
+      return;
+    }
+  
     const registrationData = {
       ...studentData,
       course_id: selectedCourseId,
       batch_id: selectedBatchId,
     };
+  
+    try {
+      const response = await fetch("http://localhost:8080/api/Student/addStudent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(registrationData),
 
-    fetch("http://localhost:8080/api/student/addStudent", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(registrationData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Student registered successfully");
-          // You can reset the form or perform any other necessary actions here
-          navigate(-1);
-        } else {
-          console.error("Error registering student");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
+      
       });
+  
+      if (response.ok) {
+        console.log("Student registered successfully");
+        setTimeout(1000)
+        // You can reset the form or perform any other necessary actions here
+        navigate("/payment/" + id + "/" + selectedBatchId);
+      } else {
+        console.error("Error registering student");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
+  
 
   return (
     <div className="student-registration-form">
       <h2>Student Registration</h2>
       <Form onSubmit={handleSubmit}>
-
         <Form.Group>
           <Form.Label>Select Course:</Form.Label>
           <Form.Control
@@ -232,18 +218,16 @@ function StudentRegistrationForm() {
             required
           >
             <option value="">Select qualification</option>
-            <option value="High School">SSC / X</option>
-            <option value="High School">HSC / XII</option>
-            <option value="High School">ITI</option>
-            <option value="Diploma">Diploma</option>
+            <option value="High School">High School</option>
             <option value="Bachelor's Degree">Bachelor's Degree</option>
             <option value="Master's Degree">Master's Degree</option>
             <option value="PhD">PhD</option>
-            <option value="PhD">Other</option>
+            {/* Add more options as needed */}
           </Form.Control>
         </Form.Group>
+       
         <Form.Group>
-          <Form.Label>Student Mobile:</Form.Label>
+          <Form.Label>Mobile:</Form.Label>
           <Form.Control
             type="text"
             name="student_mobile"
@@ -253,17 +237,16 @@ function StudentRegistrationForm() {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Student Email:</Form.Label>
+          <Form.Label>Email:</Form.Label>
           <Form.Control
             type="email"
             name="student_email"
             value={studentData.student_email}
             onChange={handleChange}
             required
-            
           />
         </Form.Group>
-        <br />
+        <br/>
         <Button variant="primary" type="submit">
           Register
         </Button>
