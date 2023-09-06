@@ -75,10 +75,13 @@ function PaymentForm() {
 
         console.log('Payment successful');
         const updateEnquiryResponse = await fetch(`http://localhost:8080/api/Enquiry/PutEnquiry/${enquiry_id}`, {
-          method: 'POST',
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
+          body : {
+            enquiry_processed_flag : true
+          }
         });
 
         if (updateEnquiryResponse.ok) {
@@ -99,7 +102,7 @@ function PaymentForm() {
 
   const handleCancelPay = async (e) => {
     // e.preventDefault();
-    await fetch(`http://localhost:8080/api/deletestudbyid/${payment.student_id}`, {
+    await fetch(`http://localhost:8080/api/Student/${payment.student_id}`, {
       method: 'DELETE',
     });
     console.log("cancel payment")

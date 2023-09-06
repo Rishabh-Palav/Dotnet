@@ -42,8 +42,6 @@ function NewPayment() {
         
         // After successful payment, you can navigate to a different route
          // Modify the route as needed
-      } else {
-        console.error('Error processing payment');
       }
     } catch (error) {
       console.error('Error:', error);

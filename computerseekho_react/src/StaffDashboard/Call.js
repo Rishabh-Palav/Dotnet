@@ -62,7 +62,7 @@ function Call(props) {
         event.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:8080/api/update_enquiry/${id}`, {
+            const response = await fetch(`http://localhost:8080/api/Enquiry/PutEnquiry/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify(enquiry),
@@ -73,6 +73,7 @@ function Call(props) {
             } else {
                 console.error('Failed to store enquiry');
             }
+            navigate(-1)
         } catch (error) {
             console.error('Error storing enquiry:', error);
         }
@@ -80,7 +81,7 @@ function Call(props) {
 
     const fetchExistingEnquiryData = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/api/getById/${id}`);
+            const response = await fetch(`http://localhost:8080/api/Enquiry/GetByIdEnquiry/${id}`);
             const existingEnquiryData = await response.json();
 
             setEnquiry(existingEnquiryData);

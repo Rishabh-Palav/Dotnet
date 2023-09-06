@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jQv9S3bLdyBtHeKewRWF3oRtD6j6wPxiHj6GQsG7K0knC9BnfhzeJlkwXIdH9572AbZYyy2tSJ8UlE+auIjT9w==",
+  "dgSpecHash": "eCS7D1TPHB/msM87KjpDTSyqgMvpuvufSOn88j179ppu+dH7XGErVNu05cuQ6P2c0K4fztsFvsWrveaL1WLsXQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\risha\\OneDrive\\Desktop\\updated project\\computerseekho\\DotNet\\DotNetComputerSekho\\DotNetComputerSekho.csproj",
+  "projectFilePath": "C:\\Users\\risha\\OneDrive\\Desktop\\Dotnet\\Dotnet\\DotNetComputerSekho\\DotNetComputerSekho.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\risha\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\risha\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

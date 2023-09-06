@@ -11834,11 +11834,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\risha\\OneDrive\\Desktop\\updated project\\computerseekho\\DotNet\\DotNetComputerSekho\\DotNetComputerSekho.csproj",
+      "projectUniqueName": "C:\\Users\\risha\\OneDrive\\Desktop\\Dotnet\\Dotnet\\DotNetComputerSekho\\DotNetComputerSekho.csproj",
       "projectName": "DotNetComputerSekho",
-      "projectPath": "C:\\Users\\risha\\OneDrive\\Desktop\\updated project\\computerseekho\\DotNet\\DotNetComputerSekho\\DotNetComputerSekho.csproj",
+      "projectPath": "C:\\Users\\risha\\OneDrive\\Desktop\\Dotnet\\Dotnet\\DotNetComputerSekho\\DotNetComputerSekho.csproj",
       "packagesPath": "C:\\Users\\risha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\risha\\OneDrive\\Desktop\\updated project\\computerseekho\\DotNet\\DotNetComputerSekho\\obj\\",
+      "outputPath": "C:\\Users\\risha\\OneDrive\\Desktop\\Dotnet\\Dotnet\\DotNetComputerSekho\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\risha\\AppData\\Roaming\\NuGet\\NuGet.Config",

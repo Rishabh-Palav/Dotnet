@@ -92,7 +92,7 @@ const Bootstraptab1 = () => {
     {
       dataField: 'actions',
       formatter: (cell, row) => (
-        <a href={"/newreg/?enquiry_id=" + row.enquiry_id}>
+        <a href={"/newreg/" + row.enquiry_id}>
           <Button variant="secondary">Register</Button>
         </a>
       ),
